@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const { preSaveBlog, preUpdateBlog } = require("../middleware/blogMiddleware");
 
 const blogSchema = new Schema(
     {
@@ -38,10 +39,12 @@ const blogSchema = new Schema(
         },
         reading_time: {
             type: Number,
-            required: true,
         },
     },
     { timestamps: true }
 );
+
+blogSchema.pre("save", preSaveBlog);
+blogSchema.pre("findOneAndUpdate", preUpdateBlog);
 
 module.exports = mongoose.model("Blog", blogSchema);
