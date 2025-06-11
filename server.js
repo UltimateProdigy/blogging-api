@@ -1,16 +1,22 @@
-require("dotenv").config();
+require("dotenv").config({ path: ".env.local" });
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
+const connectDb = require("./config/connectDb");
 
 const PORT = process.env.PORT || 3500;
+
+connectDb();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors())
+app.use(cors());
+
+app.use("/auth/register", require("./routes/auth/register"));
+app.use("/api/blogs", require("./routes/api/blogs"));
 
 app.all("*", (req, res) => {
     res.status(404);
