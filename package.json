@@ -1,0 +1,37 @@
+{
+    "name": "blogging-api",
+    "version": "1.0.0",
+    "description": "API for a blogging platform",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server",
+        "dev": "nodemon server"
+    },
+    "author": "codie",
+    "license": "ISC",
+    "dependencies": {
+        "amadeus": "^11.0.0",
+        "axios": "^1.8.4",
+        "bcrypt": "^5.1.1",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "countries-list": "^3.1.1",
+        "crypto": "^1.0.1",
+        "date-fns": "^4.1.0",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-rate-limit": "^7.5.0",
+        "google-search-results-nodejs": "^2.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongodb": "^6.13.1",
+        "mongoose": "^8.10.1",
+        "node-cache": "^5.1.2",
+        "nodemailer": "^6.10.0",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1",
+        "uuid": "^11.1.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.9"
+    }
+}
