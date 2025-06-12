@@ -57,7 +57,7 @@ const createBlog = async (req, res) => {
             });
         }
 
-        const newBlog = await Blog.create({
+        await Blog.create({
             title: title.trim(),
             body,
             description: description.trim(),
@@ -80,4 +80,56 @@ const createBlog = async (req, res) => {
     }
 };
 
-module.exports = { getAllBlogs, getSingleBlog, createBlog };
+const publishBlog = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const blog = await Blog.findOne({ id });
+        if (!blog)
+            return res.status(404).json({ message: "Blog does not exist" });
+        blog.state = "published";
+        await blog.save();
+        res.status(201).json({
+            success: true,
+            message: "Blog published successfully",
+        });
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: "Error publishing blog",
+            error: e.message,
+        });
+    }
+};
+
+const updateBlog = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await Blog.findOneAndUpdate(
+            { _id: id },
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
+
+        if (!result) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found",
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Blog updated successfully",
+            blog: result,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Update failed",
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { getAllBlogs, getSingleBlog, createBlog, publishBlog, updateBlog };
