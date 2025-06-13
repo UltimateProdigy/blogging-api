@@ -17,7 +17,7 @@ const { verifyJWT } = require("../../middleware/verifyJWT");
 router.route("/").get(getAllBlogs);
 router.route("/").post(verifyJWT, validateInput(createBlogSchema), createBlog);
 router.route("/:id").get(getSingleBlog);
-router.route("/:id").post(verifyJWT, publishBlog);
+router.route("/:id/publish").get(verifyJWT, publishBlog);
 router
     .route("/:id")
     .put(verifyJWT, validateInput(updateBlogSchema), updateBlog);

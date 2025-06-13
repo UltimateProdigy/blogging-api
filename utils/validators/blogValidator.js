@@ -27,13 +27,6 @@ const createBlogSchema = Joi.object({
             "string.max": "Each tag cannot exceed 50 characters",
         }),
 
-    author: Joi.string()
-        .pattern(/^[0-9a-fA-F]{24}$/)
-        .required()
-        .messages({
-            "string.pattern.base": "Author must be a valid user ID",
-        }),
-
     state: Joi.string().valid("draft", "published").default("draft").messages({
         "any.only": "State must be either draft or published",
     }),

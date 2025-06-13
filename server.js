@@ -17,6 +17,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/auth/register", require("./routes/auth/register"));
+app.use("/auth/login", require("./routes/auth/login"))
 app.use("/api/blogs", require("./routes/api/blogs"));
 
 app.all("*", (req, res) => {
