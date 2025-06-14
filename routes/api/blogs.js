@@ -6,6 +6,8 @@ const {
     createBlog,
     publishBlog,
     updateBlog,
+    deleteBlog,
+    getMyBlogs,
 } = require("../../controllers/blogController");
 const validateInput = require("../../middleware/validateInput");
 const {
@@ -17,9 +19,11 @@ const { verifyJWT } = require("../../middleware/verifyJWT");
 router.route("/").get(getAllBlogs);
 router.route("/").post(verifyJWT, validateInput(createBlogSchema), createBlog);
 router.route("/:id").get(getSingleBlog);
-router.route("/:id/publish").get(verifyJWT, publishBlog);
 router
     .route("/:id")
     .put(verifyJWT, validateInput(updateBlogSchema), updateBlog);
+router.route("/:id").delete(verifyJWT, deleteBlog);
+router.route("/my-blogs").get(verifyJWT, getMyBlogs);
+router.route("/publish/:id").post(verifyJWT, publishBlog);
 
 module.exports = router;

@@ -30,7 +30,6 @@ const blogSchema = new Schema(
             type: String,
             enum: ["draft", "published"],
             default: "draft",
-            required: true,
         },
         read_count: {
             type: Number,

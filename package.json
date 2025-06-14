@@ -5,7 +5,12 @@
     "main": "index.js",
     "scripts": {
         "start": "node server",
-        "dev": "nodemon server"
+        "dev": "nodemon server",
+        "test": "jest",
+        "test:watch": "jest --watch"
+    },
+    "jest": {
+        "testEnvironment": "node"
     },
     "author": "codie",
     "license": "ISC",
@@ -33,6 +38,9 @@
         "uuid": "^11.1.0"
     },
     "devDependencies": {
-        "nodemon": "^3.1.9"
+        "cross-env": "^7.0.3",
+        "jest": "^30.0.0",
+        "nodemon": "^3.1.9",
+        "supertest": "^7.1.1"
     }
 }

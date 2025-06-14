@@ -4,32 +4,37 @@ const jwt = require("jsonwebtoken");
 
 const handleLogin = async (req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email }).exec();
-    if (!user) return res.status(400).json({ message: "User does not exist" });
 
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (validPassword) {
+    try {
+        const user = await User.findOne({ email: email }).exec();
+        if (!user) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
         const accessToken = jwt.sign(
             {
-                email: user.email,
                 id: user.id,
+                email: user.email,
             },
             process.env.ACCESS_TOKEN_SECRET,
-            {
-                expiresIn: "1h",
-            }
+            { expiresIn: "1h" }
         );
-        res.json({
-            message: "User is logged in!",
+
+        return res.status(200).json({
+            message: "Login Successful",
             user: {
                 id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                email: user.email,
+                first_name: user.first_name,
+                last_name: user.last_name,
             },
-            accessToken,
+            accessToken: accessToken,
         });
-    } else {
-        res.status(401).json({ message: "Incorrect Password" });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
     }
 };
 

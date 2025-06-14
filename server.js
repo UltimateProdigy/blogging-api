@@ -1,4 +1,4 @@
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const { errorHandler } = require("./middleware/errorHandler");
 const connectDb = require("./config/connectDb");
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 3500
 
 connectDb();
 app.use(express.json());
@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/auth/register", require("./routes/auth/register"));
-app.use("/auth/login", require("./routes/auth/login"))
+app.use("/auth/login", require("./routes/auth/login"));
 app.use("/api/blogs", require("./routes/api/blogs"));
 
 app.all("*", (req, res) => {
@@ -32,6 +32,9 @@ app.all("*", (req, res) => {
 app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
-    console.log("Connected to MongoDB");
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    if (process.env.NODE_ENV !== "test") {
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    }
 });
+
+module.exports = app;
