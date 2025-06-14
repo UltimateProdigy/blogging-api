@@ -251,8 +251,15 @@ const updateBlog = async (req, res) => {
 
     try {
         const blog = await Blog.findById(id);
+
+        if (blog.author.toString() !== author.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized: You can only delete your own blogs",
+            });
+        }
         const result = await Blog.findOneAndUpdate(
-            { _id: id, author },
+            { _id: id },
             { $set: req.body },
             { new: true, runValidators: true }
         );
@@ -263,12 +270,7 @@ const updateBlog = async (req, res) => {
                 message: "Blog not found",
             });
         }
-        if (blog.author.toString() !== author.toString()) {
-            return res.status(403).json({
-                success: false,
-                message: "Unauthorized: You can only delete your own blogs",
-            });
-        }
+
         return res.status(200).json({
             success: true,
             message: "Blog updated successfully",

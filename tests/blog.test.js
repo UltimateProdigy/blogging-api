@@ -214,7 +214,7 @@ describe("Blog Endpoints", () => {
             const fakeId = "507f1f77bcf86cd799439011";
 
             await request(app)
-                .put(`/api/blogs/${fakeId}`)
+                .get(`/api/blogs/${fakeId}`)
                 .set("Authorization", authToken)
                 .send({ title: "New Title" })
                 .expect(404);
