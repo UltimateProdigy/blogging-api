@@ -24,6 +24,6 @@ router
     .put(verifyJWT, validateInput(updateBlogSchema), updateBlog);
 router.route("/:id").delete(verifyJWT, deleteBlog);
 router.route("/my-blogs").get(verifyJWT, getMyBlogs);
-router.route("/publish/:id").post(verifyJWT, publishBlog);
+router.route("/:id/publish").post(verifyJWT, publishBlog);
 
 module.exports = router;
