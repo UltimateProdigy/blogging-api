@@ -51,8 +51,8 @@ ACCESS_TOKEN_SECRET=your_jwt_secret_key
 
 | Method | Endpoint      | Description             |
 | ------ | ------------- | ----------------------- |
-| POST   | /api/login    | Login and receive a JWT |
-| POST   | /api/register | Register a new user     |
+| POST   | /auth/login    | Login and receive a JWT |
+| POST   | /auth/register | Register a new user     |
 
 ## Blog Endpoint
 
