@@ -63,7 +63,9 @@ ACCESS_TOKEN_SECRET=your_jwt_secret_key
 | PUT    | /api/blogs/:id         | Update your blog                    |
 | DELETE | /api/blogs/:id         | Delete your blog                    |
 | GET    | /api/blogs/my-blogs    | Get your own blogs                  |
-| POST   | /api/blogs/publish/:id | Publish a blog                      |
+| POST   | /api/blogs/:id/publish | Publish a blog                      |
+| GET    | /api/blogs?state=draft | Get draft blogs                     |
+| GET    | /api/blogs?page=2&limit=10 | Basic Pagination                     |
 
 # Parameter	Type	Description
 state	string	Filter by blog state: draft, published
