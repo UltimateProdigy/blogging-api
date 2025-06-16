@@ -65,7 +65,11 @@ ACCESS_TOKEN_SECRET=your_jwt_secret_key
 | GET    | /api/blogs/my-blogs    | Get your own blogs                  |
 | POST   | /api/blogs/:id/publish | Publish a blog                      |
 | GET    | /api/blogs?state=draft | Get draft blogs                     |
-| GET    | /api/blogs?page=2&limit=10 | Basic Pagination                     |
+| GET    | /api/blogs?page=2&limit=10 | Basic Pagination                |
+| GET    | /api/blogs?search=technology |Search across title, tags, or author name|
+| GET    | /api/blogs?sortBy=read_count |Sort by read count (descending - default):|
+| GET    | /api/blogs?sortBy=reading_time&order=asc |Sort by reading time (ascending):|
+| GET    | GET /api/blogs?sortBy=timestamp |Sort by timestamp (createdAt):|
 
 # Parameter	Type	Description
 state	string	Filter by blog state: draft, published
