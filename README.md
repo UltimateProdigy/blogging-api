@@ -51,18 +51,25 @@ ACCESS_TOKEN_SECRET=your_jwt_secret_key
 
 | Method | Endpoint      | Description             |
 | ------ | ------------- | ----------------------- |
-| POST   | /api/login    | Login and receive a JWT |
-| POST   | /api/register | Register a new user     |
+| POST   | /auth/login    | Login and receive a JWT |
+| POST   | /auth/register | Register a new user     |
 
 ## Blog Endpoint
 
 | Method | Endpoint               | Description                         |
 | ------ | ---------------------- | ----------------------------------- |
 | POST   | /api/blogs             | Create a new blog (initially draft) |
+| GET    | /api/blogs             | Get all blogs                       |
 | PUT    | /api/blogs/:id         | Update your blog                    |
 | DELETE | /api/blogs/:id         | Delete your blog                    |
 | GET    | /api/blogs/my-blogs    | Get your own blogs                  |
-| POST   | /api/blogs/publish/:id | Publish a blog                      |
+| POST   | /api/blogs/:id/publish | Publish a blog                      |
+| GET    | /api/blogs?state=draft | Get draft blogs                     |
+| GET    | /api/blogs?page=2&limit=10 | Basic Pagination                |
+| GET    | /api/blogs?search=technology |Search across title, tags, or author name|
+| GET    | /api/blogs?sortBy=read_count |Sort by read count (descending - default):|
+| GET    | /api/blogs?sortBy=reading_time&order=asc |Sort by reading time (ascending):|
+| GET    | GET /api/blogs?sortBy=timestamp |Sort by timestamp (createdAt):|
 
 # Parameter	Type	Description
 state	string	Filter by blog state: draft, published
