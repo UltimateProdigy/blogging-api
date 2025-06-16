@@ -59,6 +59,7 @@ ACCESS_TOKEN_SECRET=your_jwt_secret_key
 | Method | Endpoint               | Description                         |
 | ------ | ---------------------- | ----------------------------------- |
 | POST   | /api/blogs             | Create a new blog (initially draft) |
+| GET    | /api/blogs             | Get all blogs                       |
 | PUT    | /api/blogs/:id         | Update your blog                    |
 | DELETE | /api/blogs/:id         | Delete your blog                    |
 | GET    | /api/blogs/my-blogs    | Get your own blogs                  |
